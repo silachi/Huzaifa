@@ -1,0 +1,112 @@
+using System;
+
+namespace SalarySlip //Salary calculator of different employees
+{
+    class EmplInfo
+    {
+        protected string EmplName;
+        protected string EmplDesignation;
+        protected double basic = 1500;
+        public EmplInfo(string emplName, string emplDesignation, double basic)
+        {
+            this.EmplName = emplName;
+            this.EmplDesignation = emplDesignation;
+            this.basic = basic;
+        }
+    }
+    class Engineer : EmplInfo
+    {
+        double allowance;
+        double GrossSalary;
+        public Engineer(string emplName, string emplDesignation, double basic) : base(emplName, emplDesignation, basic)
+        {
+            this.allowance = 7000/12;
+        }
+        public void CalcSalary()
+        {
+            GrossSalary = basic + allowance;
+        }
+        public void DispInfo()
+        {
+            Console.WriteLine("Employee Name-{0} ", EmplName);
+            Console.WriteLine("Employee Designation-{0} ", EmplDesignation);
+            Console.WriteLine("Employee GrossSalary-{0} ", GrossSalary);
+        }
+    }
+    class Manager : EmplInfo
+    {
+        double fuelAllowance, medicalAllowance;
+        double totalAllowance;
+        double GrossSalary;
+        public Manager(string emplName, string emplDesignation, double basic) : base(emplName, emplDesignation, basic)
+        {
+            fuelAllowance = 250;
+            medicalAllowance = 1000;
+            this.totalAllowance = fuelAllowance+medicalAllowance;
+        }
+        public void CalcSalary()
+        {
+            GrossSalary = (basic + totalAllowance)*0.83;
+        }
+        public void DispInfo()
+        {
+            Console.WriteLine("Employee Name-{0} ", EmplName);
+            Console.WriteLine("Employee Designation-{0} ", EmplDesignation);
+            Console.WriteLine("Employee GrossSalary-{0} ", GrossSalary);
+        }
+    }
+    class HR : EmplInfo
+    {
+        double fuelAllowance, medicalAllowance;
+        double totalAllowance;
+        double GrossSalary;
+        public HR(string emplName, string emplDesignation, double basic) : base(emplName, emplDesignation, basic)
+        {
+            fuelAllowance = 150;
+            medicalAllowance = 800;
+            this.totalAllowance = fuelAllowance+medicalAllowance;
+
+        }
+        public void CalcSalary()
+        {
+            GrossSalary = (basic + totalAllowance)+((totalAllowance)*0.1);
+        }
+        public void DispInfo()
+        {
+            Console.WriteLine("Employee Name-{0} ", EmplName);
+            Console.WriteLine("Employee Designation-{0} ", EmplDesignation);
+            Console.WriteLine("Employee GrossSalary-{0} ", GrossSalary);
+        }
+    }
+    class Program
+    {
+        static public void Main()
+        {
+            string EmplName, EmplDesignation;
+            //double basic=1500;
+            Console.WriteLine("Enter employee name: ");
+            EmplName = Console.ReadLine();
+            Console.WriteLine("Enter designation (Engineer/Manager/HR): ");
+            EmplDesignation = Console.ReadLine();
+            if (EmplDesignation == "Engineer")
+            {
+                Engineer cal = new Engineer(EmplName, EmplDesignation,1500);
+                cal.CalcSalary();
+                cal.DispInfo();
+            }
+            if (EmplDesignation == "Manager")
+            {
+                Manager cal = new Manager(EmplName, EmplDesignation, 1500);
+                cal.CalcSalary();
+                cal.DispInfo();
+            }
+            if (EmplDesignation == "HR")
+            {
+                HR cal = new HR(EmplName, EmplDesignation, 1500);
+                cal.CalcSalary();
+                cal.DispInfo();
+            }        
+
+        }
+    }
+}
